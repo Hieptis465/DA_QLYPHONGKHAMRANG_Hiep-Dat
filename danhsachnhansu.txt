@@ -1,0 +1,4 @@
+MaNS    Ten nhan su         Ngay sinh    Que quan       SDT         Vi tri    Ngay Cong   Phu Cap    luong        
+1       1                   1            1              1           bac si    30          3000000    19500000     
+20      2                   2            2              2           quan ly   30          5000000    21500000     
+3       3                   3            3              3           y ta      30          1000000    17500000     

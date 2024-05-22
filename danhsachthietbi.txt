@@ -1,0 +1,4 @@
+MaTB      SoLuong TenTB               TinhTrang    NgaySanXuat   NgayMua       NgayBaoDuong 
+1         1       1                   1            1             1             1             
+2         2       2                   2            2             2             2             
+3         3       3                   3            3             3             3             
