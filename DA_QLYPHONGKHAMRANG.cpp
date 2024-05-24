@@ -1109,12 +1109,12 @@ void menu(quanlyphongkham a[], int n, int N, int nn)
 }
 int main() {
     int n, N, nn; 
-    cout << "Chao Mung Da Den Voi Chuong Trinh Quan Ly Phong Kham Rang " << RED_TEXT << "H" << ORANGE_TEXT << "I" << YELLOW_TEXT << "E" << GREEN_TEXT << "P" << BLUE_TEXT << "D" << INDIGO_TEXT << "A" << VIOLET_TEXT << "T \t" << endl;
-    cout << YELLOW_TEXT << "\n\n\n\nNhap so luong benh nhan phong kham rang: ";
+    cout <<"                                              Chao Mung Da Den Voi Chuong Trinh Quan Ly Phong Kham Rang " << RED_TEXT << "H" << ORANGE_TEXT << "I" << YELLOW_TEXT << "E" << GREEN_TEXT << "P" << BLUE_TEXT << "D" << INDIGO_TEXT << "A" << VIOLET_TEXT << "T \t" << endl;
+    cout <<YELLOW_TEXT<<"\n\n\n\nNhap so luong benh nhan phong kham rang: ";
     cin >> n;
-    cout << YELLOW_TEXT << "\nNhap so luong nhan su phong kham rang: ";
+    cout <<YELLOW_TEXT<<"\nNhap so luong nhan su phong kham rang: ";
     cin >> N;
-    cout << YELLOW_TEXT << "\nNhap so luong thiet bi phong kham rang: ";
+    cout <<YELLOW_TEXT<<"\nNhap so luong thiet bi phong kham rang: ";
     cin >> nn;
     quanlyphongkham* a = new quanlyphongkham[n*N*nn];
     menu(a, n, N, nn); 
