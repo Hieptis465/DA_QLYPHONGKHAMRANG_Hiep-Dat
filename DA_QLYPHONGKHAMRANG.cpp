@@ -14,12 +14,12 @@ const char* VIOLET_TEXT ="\033[1;35m";
 const char* PINK_TEXT ="\033[1;35m";   
 const char* RESET_TEXT ="\033[1;37m";
 const char* GRAY_TEXT = "\033[1;30m";      
-
+//===================================================================================================================
 class benhnhan                    // lop thong tin benh nhan 
 {                          
 private:
     int id, phikham, phidieutri, phithuoc, tongtien;
-    string sdt, tenbn, ngaysinh, quequan, ngaydieutri;
+    string sdt, tenbn, gtbn, ngaysinh, quequan, ngaydieutri, cccd; 
 public:
     void input()                     // ham nhap thông tin benh nhan 
 	{                       
@@ -36,6 +36,12 @@ public:
         }
         cout <<"\nNhap ten benh nhan: ";
         getline(cin, tenbn);
+        fflush(stdin);
+        cout <<"\nNhap so Can cuoc cong dan cua benh nhan: ";
+        getline(cin, cccd);
+        fflush(stdin);
+        cout <<"\nNhap gioi tinh benh nhan: ";
+        getline(cin, gtbn);
         fflush(stdin);
         cout <<"\nNhap ngay sinh: ";
         getline(cin, ngaysinh);
@@ -65,13 +71,19 @@ public:
     }
     void output()                        // ham xuat thông tin benh nhan 
 	{                       
-        cout << setw(8) <<left<< id << setw(20) << tenbn << setw(13) << ngaysinh<< setw(15) << quequan << setw(12) << sdt << setw(12) << ngaydieutri << setw(11) << phikham << setw(11) << phidieutri << setw(11) << phithuoc << setw(11) << tongtien<<endl;
+        cout << setw(8) <<left<< id << setw(20) << tenbn <<setw(14)<<cccd<<setw(9)<<gtbn<< setw(13) << ngaysinh<< setw(15) << quequan << setw(12) << sdt << setw(12) << ngaydieutri << setw(11) << phikham << setw(11) << phidieutri << setw(11) << phithuoc << setw(11) << tongtien<<endl;
     }
     int get_id() {                       //public cac thông tin benh nhan de use cho class qlyphongkham 
         return id;
     }
     string get_tenbn() {
     	return tenbn; 
+	}
+	string get_gtbn() {
+    	return gtbn; 
+	}
+	string get_cccd() {
+    	return cccd; 
 	}
 	string get_ngaysinh(){
 		return ngaysinh;
@@ -98,6 +110,7 @@ public:
 		return phithuoc;
 	}
 };
+//========================================================================================================================
 class NhanSu                  // lop thong tin nhan su 
 {                     
 private:
@@ -182,6 +195,7 @@ public:
 	} 
 };
 int NhanSu::hesoluongcoban = 550000;     // khoi tao bien tinh he so luong co ban = 550000 
+//===================================================================================================================
 class qlythietbi                       // class qly thiet bi phong kham rang 
 {
 private:
@@ -246,6 +260,7 @@ public:
 		return tinhtrang; 
 	}				
 };
+//===================================================================================================================
 class quanlyphongkham : public benhnhan, qlythietbi, NhanSu
 {                     // lop QLY PHONG KHAM RANG ke thua lop BENH NHAN, NHAN SU, QLY THIET BI
 public:
@@ -301,7 +316,7 @@ void nhapds(quanlyphongkham a[], int n)
 void xuatds(quanlyphongkham a[], int n) 
 {                             // ham xuat danh sach BENH NHAN  
 	cout<<endl; 
-    cout <<YELLOW_TEXT<< setw(8) << left << "MaBN" << setw(20) << left << "TenBN" << setw(13) << left << "NgaySinh" << setw(15) << left << "QueQuan" << setw(12) << left << "SDT" << setw(12) << left << "Ngaydieutri" << setw(11) << left << "Phikham" << setw(11) << left << "Phidieutri" << setw(11) << left << "Phithuoc" << setw(11) << left << "Tongtien" << endl;
+    cout <<YELLOW_TEXT<< setw(8) << left << "MaBN" << setw(20) << left << "TenBN" << setw(14) << left << "CCCD"<< setw(9) << left <<"GioiTinh"<< setw(13) << left << "NgaySinh" << setw(15) << left << "QueQuan" << setw(12) << left << "SDT" << setw(12) << left << "Ngaydieutri" << setw(11) << left << "Phikham" << setw(11) << left << "Phidieutri" << setw(11) << left << "Phithuoc" << setw(11) << left << "Tongtien" << endl;
     cout<<RESET_TEXT; 
     for (int i = 0; i < n; i++) 
 	{
@@ -313,11 +328,13 @@ void xuatfile(quanlyphongkham a[], int n)
     ofstream ofs("C:\\Users\\acer\\OneDrive\\Documents\\file\\danhsach.txt");
     if (ofs.is_open()) 
 	{
-        ofs << setw(10) << left << "MaBN" << setw(20) << left << "TenBN" << setw(15) << left << "NgaySinh" << setw(15) << left << "QueQuan" << setw(14) << left << "SDT" << setw(14) << left << "Ngaydieutri" << setw(13) << left << "Phikham" << setw(13) << left << "Phidieutri" << setw(13) << left << "Phithuoc" << setw(13) << left << "Tongtien" << endl;
+        ofs << setw(10) << left << "MaBN" << setw(20) << left << "TenBN" << setw(14) << left << "CCCD"<< setw(9) << left <<"GioiTinh"<< setw(15) << left << "NgaySinh" << setw(15) << left << "QueQuan" << setw(14) << left << "SDT" << setw(14) << left << "Ngaydieutri" << setw(13) << left << "Phikham" << setw(13) << left << "Phidieutri" << setw(13) << left << "Phithuoc" << setw(13) << left << "Tongtien" << endl;
         for (int i = 0; i < n; i++) 
 		{
             ofs << setw(10) << left << a[i].bn.get_id() ;
             ofs << setw(20) << left << a[i].bn.get_tenbn();
+            ofs << setw(14) << left << a[i].bn.get_cccd();
+            ofs << setw(9) << left << a[i].bn.get_gtbn();
             ofs << setw(15) << left << a[i].bn.get_ngaysinh();
             ofs << setw(15) << left << a[i].bn.get_quequan();
             ofs << setw(14) << left << a[i].bn.get_sdt();
@@ -342,7 +359,7 @@ void doanhthu(quanlyphongkham a[], int n)             // ham tinh tong tien cua 
 	{
         tong_tien += a[i].bn.get_tongtien();
     }
-		cout <<RED_TEXT<< "\nTong tien benh nhan chi tra la: " <<RESET_TEXT<< tong_tien <<" VND"<<endl; 
+		cout <<RED_TEXT<< "\nTong doanh thu da chi tra la: " <<RESET_TEXT<< tong_tien <<" VND"<<endl; 
 }
 void timkiem(quanlyphongkham a[], int n) 
 {                   // ham tim kiem thong tin BENH NHAN bang id 
@@ -354,7 +371,7 @@ void timkiem(quanlyphongkham a[], int n)
     cout<< GREEN_TEXT<<"============================" <<endl; 
     cout<<RESET_TEXT;
     cout<<endl; 
-    cout << setw(8) << left << "MaBN" << setw(20) << left << "TenBN" << setw(13) << left << "NgaySinh" << setw(15) << left << "QueQuan" << setw(12) << left << "SDT" << setw(12) << left << "Ngaydieutri"
+    cout << setw(8) << left << "MaBN" << setw(20) << left << "TenBN" << setw(14) << left << "CCCD"<< setw(9) << left <<"GioiTinh"<< setw(13) << left << "NgaySinh" << setw(15) << left << "QueQuan" << setw(12) << left << "SDT" << setw(12) << left << "Ngaydieutri"
          << setw(11) << left << "Phikham" << setw(11) << left << "Phidieutri" << setw(11) << left << "Phithuoc" << setw(1) << left << "Tongtien" << endl;
     for (int i = 0; i < n; i++)
 	{
@@ -861,7 +878,7 @@ void menu(quanlyphongkham a[], int n, int N, int nn)
 
         switch (LUACHON) 
 		{
-            case 1:
+            case 1:                                       // case 1: quan ly benh nhan 
                 int luachonbn;
                 do 
 				{
@@ -921,14 +938,14 @@ void menu(quanlyphongkham a[], int n, int N, int nn)
                         case 9:
                             break;
                         default:
-                            cout << RED_TEXT << "Khong co du lieu ban nhap!";
+                            cout << RED_TEXT << "Lua chon khong hop le!!!";
                             cout << RESET_TEXT;
                             system("pause");
                             break;
                     }
                 } while (luachonbn != 9);
                 break;
-            case 2:
+            case 2:                                      // case 2: quan ly nhan su 
                 int luachonns;
                 do 
 				{
@@ -988,14 +1005,14 @@ void menu(quanlyphongkham a[], int n, int N, int nn)
                         case 9:
                             break;
                         default:
-                            cout << RED_TEXT << "Khong co du lieu ban nhap!";
+                            cout << RED_TEXT << "Lua chon khong hop le!!!";
                             cout << RESET_TEXT;
                             system("pause");
                             break;
                     }
                 } while (luachonns != 9);
                 break;
-            case 3:            // ham menu lua chon 
+            case 3:                                                     // case 3: quan ly thiet bi phong kham 
                 int luachontb;
                 do 
 				{
@@ -1049,7 +1066,7 @@ void menu(quanlyphongkham a[], int n, int N, int nn)
                         case 8:                                                  // danh dau thoat khoi vong lap quay tro lai menu chinh 
                             break;
                         default:
-                            cout << RED_TEXT << "Khong co du lieu ban nhap!";
+                            cout << RED_TEXT << "Lua chon khong hop le!!!";
                             cout << RESET_TEXT;
                             system("pause");
                             break;
@@ -1068,19 +1085,21 @@ void menu(quanlyphongkham a[], int n, int N, int nn)
         }
     } while (LUACHON != 4);
 }
-int main() 
-{
+int main() {
     int n, N, nn; 
-    cout <<"                                               Chao Mung Da Den Voi Chuong Trinh Quan Ly Phong Kham Rang " << RED_TEXT << "H" << ORANGE_TEXT << "I" << YELLOW_TEXT << "E" << GREEN_TEXT << "P" << BLUE_TEXT << "D" << INDIGO_TEXT << "A" << VIOLET_TEXT << "T \t" << endl;
-    cout <<YELLOW_TEXT<<"\n\n\n\nNhap so luong benh nhan phong kham rang: ";
+    cout << "Chao Mung Da Den Voi Chuong Trinh Quan Ly Phong Kham Rang " << RED_TEXT << "H" << ORANGE_TEXT << "I" << YELLOW_TEXT << "E" << GREEN_TEXT << "P" << BLUE_TEXT << "D" << INDIGO_TEXT << "A" << VIOLET_TEXT << "T \t" << endl;
+    cout << YELLOW_TEXT << "\n\n\n\nNhap so luong benh nhan phong kham rang: ";
     cin >> n;
-    cout <<YELLOW_TEXT<<"\nNhap so luong nhan su phong kham rang: ";
+    cout << YELLOW_TEXT << "\nNhap so luong nhan su phong kham rang: ";
     cin >> N;
-    cout <<YELLOW_TEXT<<"\nNhap so luong thiet bi phong kham rang: ";
+    cout << YELLOW_TEXT << "\nNhap so luong thiet bi phong kham rang: ";
     cin >> nn;
-    quanlyphongkham* a = new quanlyphongkham[n,N,nn];              // khoi tao mang doi tuong voi kich thuoc (n: benh nhan ) va (N: nhan su) (nn: so luong thiet bi phong kham)
-    menu(a,n,N,nn);                                              //goi ham menu de hien thi menu va xu ly lua chon cua nguoi dung 
+    quanlyphongkham* a = new quanlyphongkham[n * N * nn];              // tao mang dong chua cac doi tuong cua class qlyphongkhamrang  
+    menu(a, n, N, nn); 
+    delete[] a;
     return 0;
 }
+
+
 
 
