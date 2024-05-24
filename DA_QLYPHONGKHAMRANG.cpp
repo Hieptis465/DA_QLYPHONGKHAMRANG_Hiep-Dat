@@ -59,16 +59,13 @@ public:
         cin >> phithuoc;
         fflush(stdin);
         tongtien = (phikham + phidieutri + phithuoc);            // tinh tong chi phi benh nhan 
-        cout <<RED_TEXT<<"\nTong tien(VND) : " << tongtien<<endl; 
+        cout <<RED_TEXT<<"\nTong tien : "<<RESET_TEXT<< tongtien<<" VND"<<endl; 
         cout<<RESET_TEXT; 
         fflush(stdin);
     }
     void output()                        // ham xuat thông tin benh nhan 
 	{                       
         cout << setw(8) <<left<< id << setw(20) << tenbn << setw(13) << ngaysinh<< setw(15) << quequan << setw(12) << sdt << setw(12) << ngaydieutri << setw(11) << phikham << setw(11) << phidieutri << setw(11) << phithuoc << setw(11) << tongtien<<endl;
-    }
-    void docfilebn(ifstream& is) {
-        is >> id >> tenbn >> ngaysinh >> quequan >> sdt >> ngaydieutri >> phikham >> phidieutri >> phithuoc >> tongtien;
     }
     int get_id() {                       //public cac thông tin benh nhan de use cho class qlyphongkham 
         return id;
@@ -106,7 +103,7 @@ class NhanSu                  // lop thong tin nhan su
 private:
     string SDT, Ten, date, que;
     int ID, ngaycong, phucap, luong ; 
-    static int hesoluongcoban;
+    static int hesoluongcoban;                 // bien tinh 
 public:
     string vitri;
     void INPUT()                   // ham nhap thong tin nhân su 
@@ -150,9 +147,8 @@ public:
             phucap = 0;
         }
         luong = static_cast<int>(ngaycong) * hesoluongcoban + phucap;               //tinh luong theo he so luong co ban va ngay cong + phu cap 
-        cout<<RED_TEXT<<"\nTong tien luong(VND) la: "<<luong; 
+        cout<<RED_TEXT<<"\nTong tien luong la: "<<RESET_TEXT<<luong<<"VND"<<endl; 
     }   
-    
     void OUTPUT()                   // ham xuat thong tin nhan su 
 	{                         
         cout <<setw(8)<< ID<< setw(20) << Ten << setw(13) << date<<setw(15)<<que<<setw(12)<<SDT<<setw(10)<<vitri<<setw(10)<<ngaycong<<setw(11)<<phucap<<setw(13)<<luong<<endl; 
@@ -294,7 +290,7 @@ void nhapds(quanlyphongkham a[], int n)
 			{
                 if (a[j].bn.get_id() == a[i].bn.get_id()) 
 				{            // khi id vua nhap bang id vua nhap truoc do th́ nhap lai 
-                    cout <<RED_TEXT<<"\n***Ma benh nhan khong duoc trung nhau, Moi nhap lai!" << endl;
+                    cout <<RED_TEXT<<"\n***Ma benh nhan khong duoc trung nhau. Moi nhap lai!" << endl;
                     cout<<RESET_TEXT; 
                     res++;
                 }
@@ -338,42 +334,15 @@ void xuatfile(quanlyphongkham a[], int n)
         cout << RED_TEXT <<"\nKhong the mo file de ghi!" << RESET_TEXT << endl;
     }
 }
-void DocfileBN() { 
-    ifstream ifs("C:\\Users\\acer\\OneDrive\\Documents\\file\\danhsachbenhnhan.txt");
-    if (!ifs) {
-        cout << "Mo file that bai." << endl; 
-        return; 
-    }
-    cout << YELLOW_TEXT << setw(8) << left << "MaBN"<< setw(20) << left << "TenBN"<< setw(13) << left << "NgaySinh"<< setw(15) << left << "QueQuan"<< setw(12) << left << "SDT"<< setw(12) << left << "Ngaydieutri"<< setw(11) << left << "Phikham"<< setw(11) << left << "Phidieutri"<< setw(11) << left << "Phithuoc"<< setw(11) << left << "Tongtien" << endl;
-    cout << RESET_TEXT << endl;
-    quanlyphongkham temp;                // tao mot doi tuong tam thoi de doc và luu tru du lieu 
-    while (ifs) {
-        temp.docfilebn(ifs);
-        if (ifs) {
-            cout << setw(8) << left << temp.get_id()
-                 << setw(20) << left << temp.get_tenbn()
-                 << setw(13) << left << temp.get_ngaysinh()
-                 << setw(15) << left << temp.get_quequan()
-                 << setw(12) << left << temp.get_sdt()
-                 << setw(12) << left << temp.get_ngaydieutri()
-                 << setw(11) << left << temp.get_phikham()
-                 << setw(11) << left << temp.get_phidieutri()
-                 << setw(11) << left << temp.get_phithuoc()
-                 << setw(11) << left << temp.get_tongtien() << endl;
-        }
-    }
-    ifs.close();
-}
-
-void TONG_TIEN(quanlyphongkham a[], int N)             // ham tinh tong tien cua tat ca BENH NHAN
+void doanhthu(quanlyphongkham a[], int n)             // ham tinh tong tien cua tat ca BENH NHAN
 {
 	benhnhan bn;
     int tong_tien = 0;
-    for (int i = 0; i < N; ++i) 
+    for (int i = 0; i < n; ++i) 
 	{
         tong_tien += a[i].bn.get_tongtien();
     }
-		cout <<RED_TEXT<< "\nTong tien benh nhan chi tra la: " << tong_tien <<RESET_TEXT<<endl; 
+		cout <<RED_TEXT<< "\nTong tien benh nhan chi tra la: " <<RESET_TEXT<< tong_tien <<" VND"<<endl; 
 }
 void timkiem(quanlyphongkham a[], int n) 
 {                   // ham tim kiem thong tin BENH NHAN bang id 
@@ -538,7 +507,7 @@ void tongluong(quanlyphongkham a[], int N)               // ham tinh tong luong 
 	{
         tongluong += a[i].ns.get_luong();
     }
-		cout <<RED_TEXT<< "\nTong tien luong phai tra cho tat ca nhan su: " << tongluong <<RESET_TEXT<<endl; 
+		cout <<RED_TEXT<< "\nTong tien luong phai tra cho tat ca nhan su: " <<RESET_TEXT<< tongluong <<" VND"<<endl; 
 }
 void timkiemnhansu(quanlyphongkham a[], int N) 
 {                   // ham tim kiem thong tin NHAN SU bang ID 
@@ -716,6 +685,7 @@ void nhaptb(quanlyphongkham a[], int nn)
 }
 void xuattb(quanlyphongkham a[], int nn) 
 {                   // ham xuat thong tin THIET BI
+    cout<<endl; 
     cout<<YELLOW_TEXT<<setw(10)<<left<<"MaTB"<<setw(8)<<left<<"SoLuong"<<setw(20)<<left<<"TenTB"<<setw(13)<<left<<"TinhTrang"<<setw(14)<<left<<"NgaySanXuat"<<setw(14)<<left<<"NgayMua"<<setw(13)<<left<<"NgayBaoDuong"<<endl;
     cout<< RESET_TEXT; 
     for (int i = 0; i < nn; i++) 
@@ -877,7 +847,7 @@ void menu(quanlyphongkham a[], int n, int N, int nn)
 	{
         system("cls");
         cout << RESET_TEXT << "\t                                                        Quan Ly Phong Kham Rang " << RED_TEXT << "H" << ORANGE_TEXT << "I" << YELLOW_TEXT << "E" << GREEN_TEXT << "P" << BLUE_TEXT << "D" << INDIGO_TEXT << "A" << VIOLET_TEXT << "T \t" << endl;
-        cout << GREEN_TEXT << "\n                                                           ==========================================" << endl;
+        cout << GREEN_TEXT << "\n                                                           ==================="<<RED_TEXT<<"MENU"<<GREEN_TEXT<<"===================" << endl;
         cout << GREEN_TEXT << "                                                           =                                        =" << endl;
         cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "           1. Quan ly benh nhan        " << GREEN_TEXT << " =" << endl;
         cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "           2. Quan ly nhan su          " << GREEN_TEXT << " =" << endl;
@@ -902,13 +872,12 @@ void menu(quanlyphongkham a[], int n, int N, int nn)
                     cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "            1. Nhap danh sach benh nhan           " << GREEN_TEXT << "=" << endl;
                     cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "            2. Xuat danh sach benh nhan           " << GREEN_TEXT << "=" << endl;
                     cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "            3. Xuat file danh sach                " << GREEN_TEXT << "=" << endl;
-                    cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "            4. Doc file va xuat                   " << GREEN_TEXT << "=" << endl;
-                    cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "            5. Tong tien BN da chi tra            " << GREEN_TEXT << "=" << endl;
-                    cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "            6. Tim kiem benh nhan                 " << GREEN_TEXT << "=" << endl;
-                    cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "            7. Sua thong tin benh nhan            " << GREEN_TEXT << "=" << endl;
-                    cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "            8. Xoa benh nhan                      " << GREEN_TEXT << "=" << endl;
-                    cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "            9. Them benh nhan                     " << GREEN_TEXT << "=" << endl;
-                    cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "            10. Tro ve menu chinh                 " << GREEN_TEXT << "=" << endl;
+                    cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "            4. Doanh thu cua phong kham           " << GREEN_TEXT << "=" << endl;
+                    cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "            5. Tim kiem benh nhan                 " << GREEN_TEXT << "=" << endl;
+                    cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "            6. Sua thong tin benh nhan            " << GREEN_TEXT << "=" << endl;
+                    cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "            7. Xoa benh nhan                      " << GREEN_TEXT << "=" << endl;
+                    cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "            8. Them benh nhan                     " << GREEN_TEXT << "=" << endl;
+                    cout << GREEN_TEXT << "                                                           =" << YELLOW_TEXT << "            9. Tro ve menu chinh                  " << GREEN_TEXT << "=" << endl;
                     cout << GREEN_TEXT << "                                                           =                                                  =" << endl;
                     cout << GREEN_TEXT << "                                                           ====================================================" << endl;
                     cout << YELLOW_TEXT << "\t                                                   ====> Nhap lua chon cua ban: ";
@@ -929,31 +898,27 @@ void menu(quanlyphongkham a[], int n, int N, int nn)
                             xuatfile(a, n);
                             system("pause");
                             break;
-                        case 5:
-                            TONG_TIEN(a, n);
+                        case 4:
+                            doanhthu(a, n);
                             system("pause");
                             break;
-                        case 6:
+                        case 5:
                             timkiem(a, n);
                             system("pause");
                             break;
-                        case 9:
+                        case 8:
                             thembn(a, n);
                             system("pause");
                             break;
-                        case 4:
-                            DocfileBN(); 
-                            system("pause");
-                            break;
-                        case 8:
+                        case 7:
                             xoabn(a, n);
                             system("pause");
                             break;
-                        case 7:
+                        case 6:
                             suatt(a, n);
                             system("pause");
                             break;
-                        case 10:
+                        case 9:
                             break;
                         default:
                             cout << RED_TEXT << "Khong co du lieu ban nhap!";
@@ -961,7 +926,7 @@ void menu(quanlyphongkham a[], int n, int N, int nn)
                             system("pause");
                             break;
                     }
-                } while (luachonbn != 10);
+                } while (luachonbn != 9);
                 break;
             case 2:
                 int luachonns;
