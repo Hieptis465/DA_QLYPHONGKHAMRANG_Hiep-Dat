@@ -114,7 +114,7 @@ public:
 class NhanSu                  // lop thong tin nhan su 
 {                     
 private:
-    string SDT, Ten, date, que;
+    string SDT, Ten, date, que, ngaybatdau,bangcap,loaihopdong; 
     int ID, ngaycong, phucap, luong ; 
     static int hesoluongcoban;                 // bien tinh 
 public:
@@ -144,18 +144,27 @@ public:
         cout <<"\nNhap so dien thoai: ";
         cin >> SDT;
         fflush(stdin);
+        cout <<"\nNhap ngay bat dau lam viec: ";
+        getline(cin, ngaybatdau);
+        fflush(stdin);
+        cout <<"\nNhap loai hop dong (Thoivu or Chinhthuc or Thuviec): ";
+        getline(cin, loaihopdong);
+        fflush(stdin);
         cout <<"\nNhap vi tri lam viec( y ta or bac si or quan ly): ";
         getline(cin, vitri);
         fflush(stdin);
+		cout <<"\nNhap bang cap (DSS or DMD:Bac si Nha khoa|LPN or RDA or RDH:Y ta): ";
+        getline(cin, bangcap);
+        fflush(stdin); 
 		cout<<"\nNhap so ngay cong: ";
 		cin>>ngaycong;
 		fflush(stdin); 
         if (vitri == "y ta") {                 // gán giá tri phu cap cho tung vi tri làm viec 
-            phucap = 1000000;
+            phucap = 2000000;
         } else if (vitri == "bac si") {
-            phucap = 3000000;
+            phucap = 4000000;
         } else if (vitri == "quan ly") {
-            phucap = 5000000;
+            phucap = 3000000;
         } else {
             phucap = 0;
         }
@@ -164,7 +173,7 @@ public:
     }   
     void OUTPUT()                   // ham xuat thong tin nhan su 
 	{                         
-        cout <<setw(8)<< ID<< setw(20) << Ten << setw(13) << date<<setw(15)<<que<<setw(12)<<SDT<<setw(10)<<vitri<<setw(10)<<ngaycong<<setw(11)<<phucap<<setw(13)<<luong<<endl; 
+        cout <<setw(8)<< ID<< setw(20) << Ten << setw(13) << date<<setw(15)<<que<<setw(12)<<SDT<<setw(15)<<ngaybatdau<<setw(13)<<loaihopdong<<setw(10)<<bangcap<<setw(10)<<vitri<<setw(10)<<ngaycong<<setw(11)<<phucap<<setw(13)<<luong<<endl; 
     }
     int get_ID() {
         return ID;
@@ -174,6 +183,15 @@ public:
 	}
 	string get_Ten(){
 		return Ten; 
+	}
+	string get_ngaybatdau(){
+		return ngaybatdau; 
+	}
+	string get_loaihopdong(){
+		return loaihopdong; 
+	}
+	string get_bangcap(){
+		return bangcap; 
 	}
 	string get_date(){
 		return date; 
@@ -509,7 +527,8 @@ void nhapdsns(quanlyphongkham a[], int N)
 }
 void xuatdsns(quanlyphongkham a[], int N) 
 {                   // ham xuat thong tin NHAN SU 
-    cout <<YELLOW_TEXT<<setw(8)<<left<<"MaNS"<<setw(20)<<left<< "Ten nhan su" <<setw(13)<<left<<"Ngay sinh"<<setw(15)<< left << "Que quan" << setw(12) << left << "SDT" << setw(10) << left << "Vi tri" <<setw(10)<< left <<"Ngay Cong"<<setw(11)<<left<<"Phu Cap"<<setw(13)<<left<<"Luong"<<endl; 
+    cout<<endl; 
+    cout <<YELLOW_TEXT<<setw(8)<<left<<"MaNS"<<setw(20)<<left<< "Ten nhan su" <<setw(13)<<left<<"Ngay sinh"<<setw(15)<< left << "Que quan" << setw(12) << left << "SDT" <<setw(15)<<left<<"NgayBatDau"<<setw(13)<<left<<"HopDong"<<setw(10)<<left<<"Bangcap"<< setw(10) << left << "Vi tri" <<setw(10)<< left <<"Ngay Cong"<<setw(11)<<left<<"Phu Cap"<<setw(13)<<left<<"Luong"<<endl; 
     cout<< RESET_TEXT; 
     for (int i = 0; i < N; i++) 
 	{
@@ -536,7 +555,7 @@ void timkiemnhansu(quanlyphongkham a[], int N)
     cout<< GREEN_TEXT<<"=============================" <<endl; 
     cout<<RESET_TEXT;
     cout<<endl; 
-    cout <<YELLOW_TEXT<<setw(8)<<left<<"MaNS"<<setw(20)<<left<< "Ten nhan su" <<setw(13)<<left<<"Ngay sinh"<<setw(15)<< left << "Que quan" << setw(12) << left << "SDT" << setw(10) << left << "Vi tri" <<setw(10)<< left <<"Ngay Cong"<<setw(11)<<left<<"Phu Cap"<<setw(13)<<left<<"Luong"<<endl; 
+    cout <<YELLOW_TEXT<<setw(8)<<left<<"MaNS"<<setw(20)<<left<< "Ten nhan su" <<setw(13)<<left<<"Ngay sinh"<<setw(15)<< left << "Que quan" << setw(12) << left << "SDT" <<setw(15)<<left<<"NgayBatDau"<<setw(13)<<left<<"HopDong"<<setw(10)<<left<<"Bangcap"<< setw(10) << left << "Vi tri" <<setw(10)<< left <<"Ngay Cong"<<setw(11)<<left<<"Phu Cap"<<setw(13)<<left<<"Luong"<<endl; 
     cout << RESET_TEXT;
 	for (int i = 0; i < N; i++) 
 	{
@@ -653,7 +672,7 @@ void xuatfilenhansu(quanlyphongkham a[], int N)
     ofstream ofs("C:\\Users\\acer\\OneDrive\\Documents\\file\\danhsachnhansu.txt");
     if (ofs.is_open()) 
 	{
-        ofs <<setw(8)<<left<<"MaNS"<<setw(20)<<left<< "Ten nhan su" <<setw(13)<<left<<"Ngay sinh"<<setw(15)<< left << "Que quan" << setw(12) << left << "SDT" << setw(10) << left << "Vi tri" <<setw(12)<< left <<"Ngay Cong"<<setw(11)<<left<<"Phu Cap"<<setw(13)<<left<<"luong"<<endl; 
+        ofs <<setw(8)<<left<<"MaNS"<<setw(20)<<left<< "Ten nhan su" <<setw(13)<<left<<"Ngay sinh"<<setw(15)<< left << "Que quan" << setw(12) << left << "SDT" <<setw(15)<<left<<"NgayBatDau"<<setw(13)<<left<<"HopDong"<<setw(10)<<left<<"Bangcap"<< setw(10) << left << "Vi tri" <<setw(12)<< left <<"Ngay Cong"<<setw(11)<<left<<"Phu Cap"<<setw(13)<<left<<"Luong"<<endl; 
         for (int i = 0; i < N; i++) 
 		{
             ofs << setw(8) << left << a[i].ns.get_ID() ;
@@ -661,6 +680,9 @@ void xuatfilenhansu(quanlyphongkham a[], int N)
             ofs << setw(13) << left << a[i].ns.get_date();
             ofs << setw(15) << left << a[i].ns.get_que();
             ofs << setw(12) << left << a[i].ns.get_SDT();
+            ofs << setw(15) << left << a[i].ns.get_ngaybatdau();
+            ofs << setw(13) << left << a[i].ns.get_loaihopdong();
+            ofs << setw(10) << left << a[i].ns.get_bangcap();
             ofs << setw(10) << left << a[i].ns.get_vitri();
             ofs << setw(12) << left << a[i].ns.get_ngaycong();
             ofs << setw(11) << left << a[i].ns.get_phucap();
@@ -1094,7 +1116,7 @@ int main() {
     cin >> N;
     cout << YELLOW_TEXT << "\nNhap so luong thiet bi phong kham rang: ";
     cin >> nn;
-    quanlyphongkham* a = new quanlyphongkham[n * N * nn];              // tao mang dong chua cac doi tuong cua class qlyphongkhamrang  
+    quanlyphongkham* a = new quanlyphongkham[n*N*nn];
     menu(a, n, N, nn); 
     delete[] a;
     return 0;
